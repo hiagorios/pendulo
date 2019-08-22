@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 g = 9.8
 L = 2
 n = 1000
-t = 100
+t = 60
 teta = {}
 w = {}
 
@@ -37,14 +37,14 @@ def rungeKutta(n, teta, w, h):
 		k3 = h*(w[i] + k2/2)
 		k4 = h*(w[i] + k3)
 
-		teta[i + 1] = teta[i] + (k1 + 2*k2 + 2*k3 + k4)*(h/6)
+		teta[i + 1] = teta[i] + (k1 + 2*k2 + 2*k3 + k4)*h/6
 
 		k1 = (-g/L)*np.sin(teta[i])*h
 		k2 = (-g/L)*np.sin(teta[i] + k1/2)*h
 		k3 = (-g/L)*np.sin(teta[i] + k2/2)*h
 		k4 = (-g/L)*np.sin(teta[i] + k3)*h
 
-		w[i + 1] = w[i] + (k1 + 2*k2 + 2*k3 + k4)*(h/6)
+		w[i + 1] = w[i] + (k1 + 2*k2 + 2*k3 + k4)*h/6
 
 		i = i + 1
 ######################################################
@@ -52,14 +52,13 @@ def rungeKutta(n, teta, w, h):
 def pendulo(x, y):
 	graph = plt.subplot()
 	i = 0
-	#plt.show()
 	plt.grid()
 	plt.axis([-L, L, -L - 1, 0])
 	while i < n:
-		graph.scatter(x[i], -y[i])
+		graph.scatter(x[i], -y[i], color='black', s=200)
 		plt.pause(0.0001)
-		i = i + 1
-
+		graph.scatter(x[i], -y[i], color='white', s = 300)
+		i = i + 10
 
 ######################################################
 

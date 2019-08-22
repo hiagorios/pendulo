@@ -49,9 +49,31 @@ def rungeKutta(n, teta, w, h):
 		i = i + 1
 ######################################################
 
+def pendulo(x, y):
+	graph = plt.subplot()
+	i = 0
+	#plt.show()
+	plt.grid()
+	plt.axis([-L, L, -L - 1, 0])
+	while i < n:
+		graph.scatter(x[i], -y[i])
+		plt.pause(0.0001)
+		i = i + 1
+
+
+######################################################
+
 rungeKutta(n, teta, w, t/n)
 teta = np.array([v for v in teta.values()])
 w = np.array([v for v in w.values()])
-plt.plot(x, teta, 'r--')
-plt.plot(x, w, 'b--')
-plt.show()
+
+x = np.zeros(n, dtype=float)
+y = np.zeros(n, dtype=float)
+for i in range (n):
+	x[i] = L*np.sin(teta[i])
+	y[i] = L*np.cos(teta[i])
+
+pendulo(x, y)
+#plt.plot(x, teta, 'r--')
+#plt.plot(x, w, 'b--')
+#plt.show()
